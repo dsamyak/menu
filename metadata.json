@@ -1,0 +1,6 @@
+{
+  "name": "D-Dish 3D Gourmet Showcase",
+  "description": "An interactive, photorealistic 3D restaurant experience featuring premium gourmet dishes with physically-correct lighting, procedural textures, and an AI chat chef.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
