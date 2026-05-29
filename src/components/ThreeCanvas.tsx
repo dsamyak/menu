@@ -1042,40 +1042,40 @@ export function ThreeCanvas({
   }, [hoveredIngredientName, selectedDish]);
 
   return (
-    <div className="relative w-full h-full bg-radial from-slate-900 to-black select-none overflow-hidden" id="three-stage-overlay">
+    <div className="relative w-full h-full bg-transparent select-none overflow-hidden" id="three-stage-overlay">
       {/* 3D Container render target */}
       <div ref={containerRef} className="w-full h-full" id="threejs-canvas-render-viewport" />
 
       {/* Loading Overlay */}
       {loading && (
-        <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/90 backdrop-blur-md" id="threejs-canvas-loading">
+        <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#050505] backdrop-blur-md" id="threejs-canvas-loading">
           <div className="w-12 h-12 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mb-4" />
-          <p className="text-sm font-mono tracking-wider text-amber-500 animate-pulse">
+          <p className="text-[10px] tracking-widest uppercase font-bold text-amber-500 animate-pulse">
             INITIATING PHOTOREALISTIC RENDERING...
           </p>
         </div>
       )}
 
       {/* Interactive Floating Stage Controls */}
-      <div className="absolute bottom-6 right-6 flex flex-col gap-2.5 max-w-xs bg-slate-950/80 backdrop-blur-md border border-slate-800 rounded-xl p-4 shadow-2xl transition hover:border-slate-700" id="threejs-canvas-floating-controls">
-        <div className="flex items-center justify-between border-b border-slate-800 pb-2 mb-2">
-          <span className="text-xs font-mono font-medium tracking-wide text-slate-400">STAGE HUD</span>
+      <div className="absolute bottom-6 right-6 flex flex-col gap-3 max-w-xs bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-4 shadow-2xl transition hover:border-white/20" id="threejs-canvas-floating-controls">
+        <div className="flex items-center justify-between border-b border-white/10 pb-2 mb-2">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">STAGE HUD</span>
           <span className="inline-flex w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
         </div>
 
-        <div className="flex flex-col gap-1">
-          <div className="flex justify-between text-[11px] font-mono text-slate-400">
-            <span>Explode Layers</span>
-            <span className="text-amber-500 font-medium">{Math.round(explodeLevel * 100)}%</span>
+        <div className="flex flex-col gap-2">
+          <div className="flex justify-between text-[10px] uppercase font-bold text-white/60">
+            <span className="tracking-widest">Explode Layers</span>
+            <span className="text-amber-500 font-bold">{Math.round(explodeLevel * 100)}%</span>
           </div>
-          <p className="text-[10px] text-slate-500 mb-0.5 leading-relaxed">
-            Drag mouse/touch to orbit camera. Roll wheel to zoom.
+          <p className="text-[9px] text-white/30 uppercase tracking-widest leading-relaxed mt-1">
+            Drag to orbit. Roll to zoom.
           </p>
         </div>
 
-        <div className="flex items-center justify-between mt-1 text-[11px] font-mono text-slate-400 border-t border-slate-900 pt-2">
+        <div className="flex items-center justify-between mt-2 text-[10px] tracking-widest uppercase font-bold text-white/40 border-t border-white/10 pt-3">
           <span>Active Dish:</span>
-          <span className="text-amber-500 text-right truncate font-medium max-w-[130px]">{selectedDish.name}</span>
+          <span className="text-amber-500 text-right truncate font-bold max-w-[130px]">{selectedDish.name}</span>
         </div>
       </div>
     </div>

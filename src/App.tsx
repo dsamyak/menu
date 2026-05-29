@@ -65,34 +65,33 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans" id="applet-view-root">
+    <div className="min-h-screen bg-[#050505] text-white flex flex-col font-sans select-none overflow-hidden" id="applet-view-root">
       {/* Immersive Top Bar */}
-      <header className="px-6 py-4 bg-slate-950/95 border-b border-slate-900 flex items-center justify-between sticky top-0 z-40 backdrop-blur-md">
-        <div className="flex items-center gap-2.5 select-none">
-          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-amber-500 to-rose-600 flex items-center justify-center shadow-lg shadow-amber-950/20">
-            <ChefHat className="w-5 h-5 text-slate-950" />
+      <header className="h-16 px-8 bg-black/40 border-b border-white/10 flex items-center justify-between sticky top-0 z-40 backdrop-blur-md">
+        <div className="flex items-center gap-3 select-none">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-amber-500 to-orange-400 flex items-center justify-center font-bold text-black shadow-lg shadow-amber-500/20">
+            <ChefHat className="w-5 h-5 text-black" />
           </div>
-          <div>
-            <h1 className="text-sm font-bold tracking-wider text-slate-100 uppercase sm:text-base">D-DISH 3D</h1>
-            <p className="text-[9px] font-mono tracking-widest text-amber-500/80">CRAFTING SPATIAL GASTRONOMY</p>
+          <div className="flex items-center">
+            <h1 className="text-xl font-medium tracking-tight text-white uppercase mt-0.5">D-DISH</h1>
+            <span className="text-amber-500 uppercase text-[10px] tracking-[0.2em] ml-2 font-bold mt-1">Showcase</span>
           </div>
         </div>
 
         {/* Global Stats bar & Cart toggler */}
-        <div className="flex items-center gap-4">
-          <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-[11px] text-slate-400 font-mono">
-            <Flame className="w-3.5 h-3.5 text-amber-500 animate-pulse" />
-            <span>KITCHEN STATUS: <strong className="text-emerald-400 font-semibold uppercase">READY</strong></span>
+        <div className="flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs text-white/60 font-medium tracking-wide">
+            <Flame className="w-4 h-4 text-amber-500 animate-pulse" />
+            <span>KITCHEN STATUS: <strong className="text-emerald-400 font-bold uppercase">READY</strong></span>
           </div>
 
           <button
             onClick={() => setIsCartOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 font-semibold text-slate-950 text-xs sm:text-sm hover:brightness-110 active:scale-95 transition shadow-lg shadow-amber-500/10 cursor-pointer"
+            className="relative w-10 h-10 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center cursor-pointer hover:bg-amber-500/20 transition-colors"
           >
-            <ShoppingBag className="w-4 h-4" />
-            <span>Order Ticket</span>
+            <ShoppingBag className="w-5 h-5 text-amber-500" />
             {cart.length > 0 && (
-              <span className="ml-1 px-1.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-slate-950 text-amber-500 min-w-[20px] text-center border border-amber-500/20">
+              <span className="absolute -top-1 -right-1 w-4 h-4 bg-amber-500 text-[10px] flex items-center justify-center rounded-full text-black font-bold">
                 {cart.reduce((sum, i) => sum + i.quantity, 0)}
               </span>
             )}
@@ -101,40 +100,40 @@ export default function App() {
       </header>
 
       {/* Main Immersive Workspace */}
-      <main className="flex-1 flex flex-col lg:flex-row min-h-0 bg-slate-950">
+      <main className="flex-1 flex flex-col lg:flex-row min-h-0 bg-[#050505]">
         
         {/* Left Specification & Customization Rail */}
-        <section className="w-full lg:w-[480px] xl:w-[520px] lg:border-r border-slate-900 bg-slate-950 flex flex-col shrink-0 overflow-y-auto max-h-[calc(100vh-73px)]" id="left-culinary-info-sidebar">
+        <section className="w-full lg:w-[420px] xl:w-[480px] lg:border-r border-white/5 bg-black/40 flex flex-col shrink-0 overflow-y-auto max-h-[calc(100vh-64px)] backdrop-blur-md" id="left-culinary-info-sidebar">
           
           {/* 1. Curated Dish Selector Slider */}
-          <div className="p-5 border-b border-slate-900 bg-slate-950/40">
-            <h2 className="text-[11px] font-mono tracking-wider text-slate-500 mb-3 uppercase">
+          <div className="p-8 border-b border-white/5 bg-transparent">
+            <h2 className="text-[10px] uppercase tracking-widest font-bold text-white/30 mb-4">
               SELECT SIGNATURE OFFERINGS
             </h2>
-            <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent">
+            <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-none">
               {DISHES.map((dish) => {
                 const isSelected = selectedDish.id === dish.id;
                 return (
                   <button
                     key={dish.id}
                     onClick={() => handleSelectDish(dish)}
-                    className={`flex-1 min-w-[155px] text-left p-3.5 rounded-xl border transition cursor-pointer select-none ${
+                    className={`flex-1 min-w-[160px] text-left p-4 rounded-xl border transition cursor-pointer select-none ${
                       isSelected
-                        ? 'bg-gradient-to-b from-slate-900 to-slate-950/80 border-amber-500/60 shadow-lg'
-                        : 'bg-slate-900/30 border-slate-900 hover:border-slate-800 hover:bg-slate-900/50'
+                        ? 'bg-gradient-to-b from-white/10 to-transparent border-amber-500 shadow-lg'
+                        : 'bg-white/5 border-white/10 hover:border-white/20 hover:bg-white/10'
                     }`}
                   >
-                    <span className="block text-[10px] font-mono text-amber-500/80 mb-1">
-                      {dish.category.toUpperCase()}
+                    <span className="block text-[10px] font-bold text-amber-500/80 mb-2 uppercase tracking-widest">
+                      {dish.category}
                     </span>
-                    <h3 className={`text-xs font-bold leading-tight truncate ${isSelected ? 'text-amber-500' : 'text-slate-200'}`}>
+                    <h3 className={`text-sm font-medium leading-tight truncate ${isSelected ? 'text-amber-500' : 'text-white'}`}>
                       {dish.name}
                     </h3>
-                    <div className="flex items-center gap-2 mt-2 text-[10px] font-mono text-slate-400">
+                    <div className="flex items-center gap-3 mt-4 text-[11px] font-medium text-white/40">
                       <span>${dish.price.toFixed(2)}</span>
-                      <span>•</span>
-                      <span className="flex items-center gap-0.5">
-                        <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
+                      <span>|</span>
+                      <span className="flex items-center gap-1">
+                        <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
                         {dish.rating}
                       </span>
                     </div>
@@ -145,72 +144,80 @@ export default function App() {
           </div>
 
           {/* 2. Gourmet Information View */}
-          <div className="p-5 space-y-4 border-b border-slate-900">
+          <div className="p-8 space-y-6 border-b border-white/5 bg-transparent">
             <div>
-              <div className="flex items-center justify-between">
-                <span className="inline-block px-2.5 py-0.5 rounded text-[10px] font-mono bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase font-medium">
-                  {selectedDish.category}
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-bold text-amber-500 tracking-[0.3em] uppercase">
+                  {selectedDish.category} Selection
                 </span>
-                
-                <div className="flex items-center gap-2.5 text-xs text-slate-400 font-mono">
-                  <span className="flex items-center gap-1">
-                    <Flame className="w-3.5 h-3.5 text-red-500" />
-                    {selectedDish.calories} kcal
-                  </span>
-                  <span>•</span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5 text-slate-400" />
-                    {selectedDish.prepTime}
-                  </span>
-                </div>
               </div>
 
-              <h2 className="text-xl font-bold font-sans mt-2.5 text-slate-100 tracking-tight leading-snug">
+              <h2 className="text-4xl font-light tracking-tight text-white leading-tight">
                 {selectedDish.name}
               </h2>
-              <p className="text-xs text-amber-500/90 font-mono mt-1 italic italic leading-relaxed">
+              <p className="text-xs text-amber-500/80 font-mono mt-3 italic leading-relaxed">
                 "{selectedDish.tagline}"
               </p>
-              <p className="text-xs md:text-[13px] text-slate-400 mt-2.5 leading-relaxed">
+              <p className="text-sm text-white/40 mt-4 leading-relaxed max-w-sm">
                 {selectedDish.longDescription}
               </p>
             </div>
+            
+            {/* Quick stats replacing old pills */}
+            <div className="flex gap-10 mt-6 pt-2">
+              <div>
+                <div className="text-white/30 text-[10px] uppercase tracking-widest font-bold mb-1">Prep Time</div>
+                <div className="text-lg font-light text-white flex items-center gap-2"><Clock className="w-4 h-4 text-white/40"/> {selectedDish.prepTime}</div>
+              </div>
+              <div>
+                <div className="text-white/30 text-[10px] uppercase tracking-widest font-bold mb-1">Energy</div>
+                <div className="text-lg font-light text-white flex items-center gap-2"><Flame className="w-4 h-4 text-white/40"/> {selectedDish.calories} <span className="text-white/40 text-sm">kcal</span></div>
+              </div>
+            </div>
 
             {/* Chef Tip Callout */}
-            <div className="p-3 bg-rose-950/10 rounded-xl border border-rose-950/20 flex gap-2.5 items-start">
-              <Sparkles className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-              <div className="space-y-0.5">
-                <h4 className="text-[11px] font-mono font-bold text-slate-300 uppercase">Chef Jacques' Recommendation</h4>
-                <p className="text-[11px] text-slate-400 leading-normal">{selectedDish.chefTip}</p>
+            <div className="p-4 bg-white/5 rounded-xl border border-white/10 flex gap-3 items-start mt-4">
+              <Sparkles className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+              <div className="space-y-1">
+                <h4 className="text-[10px] tracking-widest font-bold text-white/60 uppercase">Chef Jacques' Recommendation</h4>
+                <p className="text-xs text-white/50 leading-relaxed max-w-xs">{selectedDish.chefTip}</p>
               </div>
             </div>
           </div>
 
           {/* 3. Ingredient Interactive Board */}
-          <div className="p-5 border-b border-slate-900 bg-slate-950/20">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-[11px] font-mono tracking-wider text-slate-500 uppercase">
-                INTERACTIVE INGREDIENT LIST
+          <div className="p-8 border-b border-white/5 bg-transparent">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-[10px] tracking-widest font-bold text-white/30 uppercase">
+                Ingredients Visualization
               </h3>
-              <span className="text-[9px] font-mono text-amber-500/70">HOVER ITEM TO HIGHLIGHT IN 3D</span>
+              <span className="text-[9px] text-amber-500/70 font-bold uppercase tracking-widest">Hover to Inspect</span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2" id="spec-sheet-ingredients">
-              {selectedDish.ingredients.map((ing) => (
+            <div className="space-y-3" id="spec-sheet-ingredients">
+              {selectedDish.ingredients.map((ing, idx) => (
                 <div
                   key={ing.name}
                   onMouseEnter={() => setHoveredIngredient(ing.name)}
                   onMouseLeave={() => setHoveredIngredient(null)}
-                  className={`p-2.5 rounded-lg border text-left transition select-none ${
+                  className={`flex items-center gap-4 p-3 rounded-lg border transition cursor-pointer select-none ${
                     hoveredIngredient && ing.name.toLowerCase().includes(hoveredIngredient.toLowerCase())
-                      ? 'bg-amber-600/10 border-amber-500/60 text-slate-100'
-                      : 'bg-slate-900/40 border-slate-900 text-slate-300 hover:border-slate-800'
+                      ? 'bg-white/10 border-amber-500 text-white'
+                      : 'bg-white/5 border-white/10 text-white/60 hover:bg-white/10 hover:border-white/20'
                   }`}
                 >
-                  <div className="font-semibold text-xs truncate">{ing.name}</div>
-                  <div className="text-[10px] font-mono text-slate-500 mt-0.5 flex justify-between">
-                    <span>{ing.quantity}</span>
-                    {ing.optional && <span className="text-amber-500/70 font-bold uppercase text-[8px]">Optional addon</span>}
+                  <div className="w-10 h-10 rounded-lg bg-black/40 border border-white/10 overflow-hidden shrink-0 flex items-center justify-center text-[10px] font-mono text-white/20 uppercase">
+                    OBJ {idx+1}
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-xs font-medium">{ing.name}</div>
+                    <div className="h-1 w-full bg-white/10 rounded-full mt-2">
+                       <div className="h-full bg-white/30 rounded-full transition-all duration-300" style={{ width: `${Math.max(20, 100 - (idx * 20))}%` }}></div>
+                    </div>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <div className="text-[10px] font-mono text-white/40">{ing.quantity}</div>
+                    {ing.optional && <div className="text-[9px] text-amber-500/70 font-bold uppercase tracking-widest mt-1">Add-on</div>}
                   </div>
                 </div>
               ))}
@@ -218,16 +225,16 @@ export default function App() {
           </div>
 
           {/* 4. Ticket Customization Block */}
-          <div className="p-5 border-b border-slate-900 bg-slate-950">
-            <h3 className="text-[11px] font-mono tracking-wider text-slate-500 mb-3.5 uppercase">
-              CUSTOMIZE PREPARATION
+          <div className="p-8 border-b border-white/5 bg-transparent">
+            <h3 className="text-[10px] tracking-widest font-bold text-white/30 mb-4 uppercase">
+              Customize Experience
             </h3>
 
-            <div className="space-y-4">
+            <div className="space-y-6">
               {/* Extra toppings */}
               <div>
-                <label className="block text-[10px] font-mono text-slate-400 mb-2 uppercase">CULINARY ALTERATIONS</label>
-                <div className="flex flex-wrap gap-2">
+                <label className="block text-[10px] font-bold text-white/40 mb-3 uppercase tracking-widest">Culinary Alterations</label>
+                <div className="grid grid-cols-2 gap-3">
                   {['Extra White Truffle Butter', 'Glistening Glaze', 'Dredged Chili Shards', 'Foil Flakes'].map((adj) => {
                     const isSelected = !!selectedAdjustments[adj];
                     return (
@@ -235,10 +242,10 @@ export default function App() {
                         key={adj}
                         type="button"
                         onClick={() => handleToggleAdjustment(adj)}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium border transition cursor-pointer select-none ${
+                        className={`h-11 px-3 rounded-lg text-xs font-medium border transition cursor-pointer select-none text-left truncate leading-tight ${
                           isSelected
-                            ? 'bg-amber-500/10 text-amber-400 border-amber-500/40'
-                            : 'bg-slate-900 text-slate-400 border-slate-800 hover:border-slate-700'
+                            ? 'bg-white/10 border-amber-500 text-white shadow-lg'
+                            : 'bg-white/5 border-white/10 text-white/60 hover:border-amber-500/50 hover:bg-white/10'
                         }`}
                       >
                         {isSelected ? '✓ ' : '+ '} {adj}
@@ -250,29 +257,30 @@ export default function App() {
 
               {/* Custom Written request notes */}
               <div>
-                <label className="block text-[10px] font-mono text-slate-400 mb-2 uppercase">
-                  SPECIAL REQUEST TO JACQUES
+                <label className="block text-[10px] font-bold text-white/40 mb-3 uppercase tracking-widest">
+                  Special Request
                 </label>
                 <textarea
                   value={customNotes}
                   onChange={(e) => setCustomNotes(e.target.value)}
-                  placeholder="e.g. Please sear burger medium-rare / cook ramen broth extra spicy with green sprouts..."
+                  placeholder="Any preparation notes for Head Chef Jacques..."
                   rows={2}
-                  className="w-full text-xs text-slate-200 placeholder-slate-600 bg-slate-900 p-3 rounded-lg border border-slate-850 focus:outline-none focus:border-amber-500/60 transition resize-none leading-relaxed"
+                  className="w-full text-xs text-white placeholder-white/30 bg-white/5 p-4 rounded-lg border border-white/10 focus:outline-none focus:border-amber-500 transition resize-none leading-relaxed"
                 />
               </div>
 
               <button
                 onClick={handleAddToCart}
-                className="w-full py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:brightness-110 active:scale-[0.98] text-slate-950 font-sans font-bold text-xs rounded-xl transition tracking-wider shadow-lg shadow-amber-950/20 cursor-pointer text-center uppercase"
+                className="w-full h-14 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl flex items-center justify-between px-6 shadow-2xl shadow-amber-500/20 active:scale-95 transition-transform cursor-pointer"
               >
-                ADD SELECTION TO ORDER TICKET — ${(selectedDish.price).toFixed(2)}
+                <span className="font-bold uppercase tracking-widest text-xs sm:text-sm text-black">Add to Experience</span>
+                <span className="font-medium text-black text-sm">${(selectedDish.price).toFixed(2)}</span>
               </button>
             </div>
           </div>
 
           {/* 5. Embedded Conversational AI Jacques Chat */}
-          <div className="p-5 flex-1 min-h-[500px]">
+          <div className="p-8 flex-1 min-h-[500px]">
             <AIChefPanel
               selectedDish={selectedDish}
               onTriggerTheme={setLightTheme}
@@ -285,21 +293,22 @@ export default function App() {
         </section>
 
         {/* Right 3D Render Viewport Area */}
-        <section className="flex-1 relative flex flex-col min-h-[500px] lg:h-auto" id="right-viewport-canvas-container">
+        <section className="flex-1 relative flex flex-col min-h-[500px] lg:h-auto overflow-hidden bg-[#050505]" id="right-viewport-canvas-container">
           
           {/* Floating UI: Top Viewport Overlay Controls */}
-          <div className="absolute top-5 left-5 z-20 flex flex-wrap gap-2 select-none" id="viewport-stage-overlay-controls">
+          <div className="absolute top-8 left-8 z-20 flex flex-wrap gap-4 select-none" id="viewport-stage-overlay-controls">
             {/* Visual Lights Theme Selector */}
-            <div className="flex items-center gap-1.5 bg-slate-950/85 backdrop-blur-md border border-slate-850 rounded-lg p-1 shadow-lg">
-              <span className="text-[9px] font-mono font-semibold text-slate-500 px-2 uppercase">Theme</span>
+            <div className="flex items-center gap-1 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full py-1 px-2 shadow-lg">
+              <span className="text-[10px] font-bold text-white/40 px-3 uppercase tracking-widest">Theme</span>
+              <div className="w-[1px] h-4 bg-white/10 mx-1"></div>
               {(['warm', 'cool', 'cyberpunk', 'candle'] as LightThemeType[]).map((theme) => (
                 <button
                   key={theme}
                   onClick={() => setLightTheme(theme)}
-                  className={`px-2.5 py-1 text-[10px] font-mono leading-none font-bold uppercase rounded transition cursor-pointer ${
+                  className={`px-3 py-1.5 text-[10px] text-center font-bold uppercase tracking-widest rounded-full transition cursor-pointer ${
                     lightTheme === theme
-                      ? 'bg-amber-500 text-slate-950 shadow-md'
-                      : 'text-slate-400 hover:text-slate-100'
+                      ? 'bg-amber-500 text-black shadow-md'
+                      : 'text-white/40 hover:text-white'
                   }`}
                 >
                   {theme}
@@ -310,21 +319,21 @@ export default function App() {
             {/* Wireframe Toggle */}
             <button
               onClick={() => setWireframe(!wireframe)}
-              className={`p-2 bg-slate-950/85 backdrop-blur-md border rounded-lg shadow-lg text-[10px] font-mono font-bold uppercase transition flex items-center gap-1 cursor-pointer ${
+              className={`px-4 py-1.5 bg-white/5 backdrop-blur-xl border rounded-full shadow-lg text-[10px] font-bold uppercase tracking-widest transition flex items-center gap-2 cursor-pointer ${
                 wireframe
-                  ? 'border-amber-500 text-amber-400'
-                  : 'border-slate-850 text-slate-400 hover:text-slate-100'
+                  ? 'border-amber-500 text-amber-500'
+                  : 'border-white/10 text-white/40 hover:text-white'
               }`}
             >
-              <Eye className="w-3.5 h-3.5" />
+              <Eye className="w-4 h-4" />
               <span>{wireframe ? 'Solid' : 'Wireframe'}</span>
             </button>
           </div>
 
           {/* Interactive Floating Sliders */}
-          <div className="absolute top-5 right-5 z-20 flex flex-col items-end gap-2" id="explode-slider-container">
-            <div className="bg-slate-950/85 backdrop-blur-md border border-slate-850 rounded-lg p-3 shadow-lg flex items-center gap-3">
-              <span className="text-[10px] font-mono font-bold text-slate-500 uppercase shrink-0">DECONSTRUCT LAYERS</span>
+          <div className="absolute top-8 right-8 z-20 flex flex-col items-end gap-2" id="explode-slider-container">
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-full py-2 px-4 shadow-lg flex items-center gap-4">
+              <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest shrink-0">Deconstruct</span>
               <input
                 type="range"
                 min="0"
@@ -332,13 +341,17 @@ export default function App() {
                 step="0.01"
                 value={explodeLevel}
                 onChange={(e) => setExplodeLevel(parseFloat(e.target.value))}
-                className="w-28 sm:w-36 h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-500 focus:outline-none"
+                className="w-28 sm:w-32 h-1 bg-white/10 rounded-full appearance-none cursor-pointer accent-amber-500 focus:outline-none"
               />
             </div>
           </div>
 
           {/* Three.js Render Stage */}
           <div className="w-full h-full min-h-[500px]">
+            {/* Soft Ambient Radiance behind canvas matching design template */}
+            <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,#2a2a2e_0%,#050505_100%)]"></div>
+            <div className="absolute w-[600px] h-[300px] bg-amber-500/10 blur-[120px] rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+
             <ThreeCanvas
               selectedDish={selectedDish}
               lightTheme={lightTheme}
@@ -349,9 +362,13 @@ export default function App() {
             />
           </div>
 
-          {/* Tiny Info Banner inside Scene viewport */}
-          <div className="absolute bottom-5 left-5 z-20 bg-slate-950/80 backdrop-blur-sm px-3.5 py-2.5 rounded-lg border border-slate-900 text-[11px] font-mono text-slate-400 select-none max-w-sm hidden sm:block">
-            🎁 Drag mouse to orbit. Scroll wheel zooms. Hover over the ingredient list in the sidebar on the left to highlight parts.
+          {/* Interactive UI bottom pills */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-6 bg-white/5 backdrop-blur-xl border border-white/10 px-6 py-3 rounded-full pointer-events-none select-none">
+            <div className="text-[10px] text-white/40 font-bold uppercase tracking-widest pb-0.5">Drag to Rotate</div>
+            <div className="w-[1px] h-4 bg-white/10"></div>
+            <div className="text-[10px] text-amber-500 font-bold uppercase tracking-widest pb-0.5 whitespace-nowrap">Hover List to Inspect</div>
+            <div className="w-[1px] h-4 bg-white/10"></div>
+            <div className="text-[10px] text-white/40 font-bold uppercase tracking-widest pb-0.5">Scroll to Zoom</div>
           </div>
         </section>
       </main>

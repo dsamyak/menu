@@ -120,23 +120,23 @@ Ask me anything about its rare ingredients, organic sourcing, or secret culinary
   ];
 
   return (
-    <div className="flex flex-col h-full bg-slate-950/60 backdrop-blur-md rounded-xl border border-slate-900 overflow-hidden" id="ai-chef-chat-panel">
+    <div className="flex flex-col h-full bg-[#0a0a0a] backdrop-blur-md rounded-xl border border-white/10 overflow-hidden" id="ai-chef-chat-panel">
       {/* Header */}
-      <div className="flex items-center gap-3 bg-gradient-to-r from-amber-600/20 to-slate-950 px-4 py-3 border-b border-rose-950/20">
+      <div className="flex items-center gap-3 bg-gradient-to-r from-amber-500/10 to-transparent px-4 py-4 border-b border-white/10">
         <div className="relative">
-          <div className="w-9 h-9 rounded-full bg-amber-500/20 flex items-center justify-center border border-amber-500/40">
-            <ChefHat className="w-5 h-5 text-amber-400" />
+          <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center border border-amber-500/30">
+            <ChefHat className="w-5 h-5 text-amber-500" />
           </div>
-          <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-slate-950" />
+          <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-[#0a0a0a]" />
         </div>
         <div className="flex-1">
-          <div className="flex items-center gap-1.5">
-            <h3 className="font-sans text-sm font-semibold text-slate-100 tracking-tight">Chef Jacques</h3>
-            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-medium bg-amber-400/10 text-amber-400 border border-amber-400/20">
+          <div className="flex items-center gap-2">
+            <h3 className="font-sans text-sm font-semibold text-white tracking-tight">Chef Jacques</h3>
+            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-bold tracking-widest uppercase bg-amber-500/10 text-amber-500 border border-amber-500/20">
               AI SOMMELIER
             </span>
           </div>
-          <p className="text-[10px] text-slate-400">Head Chef & Culinary Director</p>
+          <p className="text-[10px] text-white/40 tracking-widest uppercase mt-0.5 font-bold">Head Chef</p>
         </div>
       </div>
 
@@ -147,25 +147,25 @@ Ask me anything about its rare ingredients, organic sourcing, or secret culinary
             key={msg.id}
             className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'} space-y-1.5`}
           >
-            <div className="flex items-center gap-2 text-[10px] font-mono text-slate-500">
-              {msg.role === 'assistant' && <ChefHat className="w-3 h-3 text-amber-500/80" />}
-              <span>{msg.role === 'user' ? 'YOU' : 'CHEF JACQUES'}</span>
+            <div className="flex items-center gap-2 text-[9px] font-bold tracking-widest text-white/30 uppercase">
+              {msg.role === 'assistant' && <ChefHat className="w-3 h-3 text-amber-500" />}
+              <span>{msg.role === 'user' ? 'YOU' : 'CHEF'}</span>
               <span>•</span>
               <span>{msg.timestamp}</span>
             </div>
 
             <div
-              className={`max-w-[90%] rounded-2xl px-3.5 py-2.5 text-xs text-slate-100 md:text-[13px] leading-relaxed shadow-lg ${
+              className={`max-w-[90%] rounded-2xl px-4 py-3 text-xs md:text-sm leading-relaxed shadow-lg ${
                 msg.role === 'user'
-                  ? 'bg-amber-600/20 border border-amber-500/40 rounded-tr-sm'
-                  : 'bg-slate-900/90 border border-slate-800 rounded-tl-sm'
+                  ? 'bg-amber-500/10 border border-amber-500/30 rounded-tr-sm text-amber-50'
+                  : 'bg-white/5 border border-white/10 rounded-tl-sm text-white/80'
               }`}
             >
               <p className="whitespace-pre-wrap">{msg.content}</p>
 
               {/* Activated state visual triggers */}
               {msg.suggestedAction && (
-                <div className="mt-2.5 pt-2 border-t border-slate-800 flex items-center gap-2 text-[10px] font-mono text-emerald-400">
+                <div className="mt-3 pt-2.5 border-t border-white/10 flex items-center gap-2 text-[10px] font-mono text-emerald-400">
                   <Sparkles className="w-3 h-3 text-emerald-400 animate-spin" />
                   <span>Interactive scene triggered: <strong>{msg.suggestedAction.type.toUpperCase()}</strong></span>
                 </div>
@@ -175,21 +175,21 @@ Ask me anything about its rare ingredients, organic sourcing, or secret culinary
         ))}
 
         {sending && (
-          <div className="flex items-center gap-2 text-xs text-amber-400 font-mono pl-1 animate-pulse">
+          <div className="flex items-center gap-2 text-[10px] tracking-widest text-amber-500 font-bold uppercase pl-1 animate-pulse">
             <Sparkles className="w-3.5 h-3.5 animate-spin" />
-            <span>Chef Jacques is studying ingredients...</span>
+            <span>Jacques is thinking...</span>
           </div>
         )}
       </div>
 
       {/* Chat Action Suggestions */}
-      <div className="px-4 py-2 border-t border-slate-900/60 flex gap-1.5 overflow-x-auto whitespace-nowrap scrollbar-none bg-slate-950/40" id="ai-chef-quick-queries">
+      <div className="px-4 py-3 border-t border-white/5 flex gap-2 overflow-x-auto whitespace-nowrap scrollbar-none bg-transparent" id="ai-chef-quick-queries">
         {suggestions.map((s, idx) => (
           <button
             key={idx}
             onClick={() => handleSend(s.query)}
             disabled={sending}
-            className="px-2.5 py-1.5 rounded-full text-[10px] font-medium bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 hover:border-amber-500/40 transition cursor-pointer disabled:opacity-50"
+            className="px-3 py-2 rounded-full text-[10px] font-medium bg-white/5 hover:bg-white/10 text-white/60 border border-white/10 hover:border-amber-500/40 transition cursor-pointer disabled:opacity-50"
           >
             {s.label}
           </button>
@@ -197,31 +197,31 @@ Ask me anything about its rare ingredients, organic sourcing, or secret culinary
       </div>
 
       {/* Interactive Controls Overlay */}
-      <div className="p-3 bg-slate-950 flex flex-wrap gap-2 items-center justify-between border-t border-slate-900" id="ai-chef-manual-sliders">
-        <div className="flex items-center gap-2 select-none">
-          <span className="text-[10px] font-mono text-slate-400">EXPLODE:</span>
+      <div className="p-4 bg-transparent flex flex-wrap gap-2 items-center justify-between border-t border-white/5" id="ai-chef-manual-sliders">
+        <div className="flex items-center gap-3 select-none">
+          <span className="text-[9px] font-bold text-white/30 tracking-widest uppercase">EXPLODE:</span>
           <button
             onClick={() => onTriggerExplode(explodeLevel > 0 ? 0 : 0.85)}
-            className={`p-1.5 rounded text-xs font-mono border transition ${
+            className={`px-3 py-1.5 rounded-lg text-[10px] font-bold tracking-widest uppercase border transition cursor-pointer ${
               explodeLevel > 0
-                ? 'bg-amber-500/10 text-amber-400 border-amber-500/30'
-                : 'bg-slate-900 text-slate-500 border-slate-800 hover:border-slate-700'
+                ? 'bg-amber-500/10 text-amber-500 border-amber-500/30'
+                : 'bg-white/5 text-white/40 border-white/10 hover:border-white/20 hover:text-white/80'
             }`}
             title="Slices individual gourmet food layers"
           >
-            {explodeLevel > 0 ? 'RESET ASSEMBLY' : 'DECONSTRUCT LAYER'}
+            {explodeLevel > 0 ? 'RESET' : 'DECONSTRUCT'}
           </button>
         </div>
 
-        <div className="flex gap-1">
+        <div className="flex gap-1.5">
           {(['warm', 'candle', 'cyberpunk', 'cool'] as LightThemeType[]).map((theme) => (
             <button
               key={theme}
               onClick={() => onTriggerTheme(theme)}
-              className={`px-1.5 py-1 rounded text-[9px] uppercase font-mono border transition ${
+              className={`px-2 py-1.5 rounded-lg text-[9px] uppercase font-bold tracking-widest border transition ${
                 currentTheme === theme
-                  ? 'bg-amber-500/20 text-amber-400 border-amber-500/40'
-                  : 'bg-slate-900 text-slate-500 border-slate-800'
+                  ? 'bg-amber-500/10 text-amber-500 border-amber-500/30'
+                  : 'bg-white/5 text-white/40 border-white/10 hover:border-white/20 cursor-pointer'
               }`}
             >
               {theme}
@@ -231,7 +231,7 @@ Ask me anything about its rare ingredients, organic sourcing, or secret culinary
       </div>
 
       {/* Input */}
-      <div className="px-3 pb-3 bg-slate-950 border-t border-slate-900">
+      <div className="px-4 pb-4 bg-transparent">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -245,14 +245,14 @@ Ask me anything about its rare ingredients, organic sourcing, or secret culinary
             onChange={(e) => setInput(e.target.value)}
             disabled={sending}
             placeholder={`Ask Jacques about the ${selectedDish.name}...`}
-            className="w-full text-xs md:text-sm text-slate-100 placeholder-slate-500 bg-slate-900 pl-4 pr-12 py-2.5 rounded-lg border border-slate-800 focus:outline-none focus:border-amber-500/60 disabled:opacity-70 transition"
+            className="w-full text-xs md:text-sm text-white placeholder-white/30 bg-white/5 pl-4 pr-12 py-3.5 rounded-xl border border-white/10 focus:outline-none focus:border-amber-500/60 disabled:opacity-70 transition"
           />
           <button
             type="submit"
             disabled={sending || !input.trim()}
-            className="absolute right-1.5 p-1.5 rounded-md bg-amber-500 text-slate-950 hover:bg-amber-400 transition cursor-pointer disabled:opacity-40 disabled:hover:bg-amber-500"
+            className="absolute right-2 p-2 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 text-black shadow-lg hover:brightness-110 transition cursor-pointer disabled:opacity-40 disabled:grayscale"
           >
-            <Send className="w-3.5 h-3.5" />
+            <Send className="w-4 h-4" />
           </button>
         </form>
       </div>
